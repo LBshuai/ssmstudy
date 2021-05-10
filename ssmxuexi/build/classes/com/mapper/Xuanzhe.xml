@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+	<mapper namespace="com.mapper.XuanzheMapper">
+		<resultMap type="Xuanzhe" id="xuanzheResult">
+			<id property="id" column="id"/>
+			<result property="name" column="name"/>
+			<result property="pic" column="pic"/>
+			<result property="kinfo" column="kinfo"/>
+			<result property="a" column="a"/>
+			<result property="b" column="b"/>
+			<result property="c" column="c"/>
+			<result property="d" column="d"/>
+			<result property="daan" column="daan"/>
+			<result property="fenshu" column="fenshu"/>
+			<result property="jiexi" column="jiexi"/>
+			<result property="ext" column="ext"/>
+			<association property="kinfo" column="kinfofk" select="com.mapper.KinfoMapper.get">
+			</association>
+		</resultMap>
+		<insert id="insert" parameterType="Xuanzhe">
+			insert into xuanzhe
+			<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="name != null">name,</if>
+			<if test="pic != null">pic,</if>
+			<if test="kinfo != null">kinfo,</if>
+			<if test="a != null">a,</if>
+			<if test="b != null">b,</if>
+			<if test="c != null">c,</if>
+			<if test="d != null">d,</if>
+			<if test="daan != null">daan,</if>
+			<if test="fenshu != null">fenshu,</if>
+			<if test="jiexi != null">jiexi,</if>
+			<if test="ext != null">ext,</if>
+			</trim>
+			<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="name != null">#{name},</if>
+			<if test="pic != null">#{pic},</if>
+			<if test="kinfo != null">#{kinfo},</if>
+			<if test="a != null">#{a},</if>
+			<if test="b != null">#{b},</if>
+			<if test="c != null">#{c},</if>
+			<if test="d != null">#{d},</if>
+			<if test="daan != null">#{daan},</if>
+			<if test="fenshu != null">#{fenshu},</if>
+			<if test="jiexi != null">#{jiexi},</if>
+			<if test="ext != null">#{ext},</if>
+			</trim>
+		</insert>
+		<update id="update" parameterType="Xuanzhe">
+			update xuanzhe
+			<trim prefix="set" suffixOverrides=",">
+			<if test="name != null">name=#{name},</if>
+			<if test="pic != null">pic=#{pic},</if>
+			<if test="kinfo != null">kinfo=#{kinfo},</if>
+			<if test="a != null">a=#{a},</if>
+			<if test="b != null">b=#{b},</if>
+			<if test="c != null">c=#{c},</if>
+			<if test="d != null">d=#{d},</if>
+			<if test="daan != null">daan=#{daan},</if>
+			<if test="fenshu != null">fenshu=#{fenshu},</if>
+			<if test="jiexi != null">jiexi=#{jiexi},</if>
+			<if test="ext != null">ext=#{ext},</if>
+		</trim>
+			where id=#{id}
+		</update>
+		<delete id="delete" parameterType="Xuanzhe">
+			delete from xuanzhe where id= #{id}
+		</delete>
+		<select id="list" resultType="Xuanzhe" resultMap="xuanzheResult">
+			select * from  xuanzhe where 1=1 ${where} order by id desc
+			</select>
+		<select id="sealist" resultType="Xuanzhe" resultMap="xuanzheResult">
+			select * from  xuanzhe where 1=1 ${where} 
+			</select>
+		<select id="get" parameterType="_int" resultType="Xuanzhe">
+			select * from  Xuanzhe  where id= #{id}
+		</select>
+			<select id="total" resultType="int">
+	        select count(*) from xuanzhe    
+	    </select>
+<update id="updatesql"  parameterType="String">
+${value}
+</update>
+<delete id="deletesql"  parameterType="String">
+${value}  
+</delete>
+	</mapper>

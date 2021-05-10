@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+	<mapper namespace="com.mapper.LeixingMapper">
+		<resultMap type="Leixing" id="leixingResult">
+			<id property="id" column="id"/>
+			<result property="name" column="name"/>
+		</resultMap>
+		<insert id="insert" parameterType="Leixing">
+			insert into leixing (name) values (#{name})
+		</insert>
+		<update id="update" parameterType="Leixing">
+			update leixing set name=#{name} where id=#{id}
+		</update>
+		<delete id="delete" parameterType="Leixing">
+			delete from leixing where id= #{id}
+		</delete>
+		<select id="list" resultType="Leixing" resultMap="leixingResult">
+			select * from  leixing where 1=1 ${where} order by id desc
+			</select>
+		<select id="sealist" resultType="Leixing" resultMap="leixingResult">
+			select * from  leixing where 1=1 ${where} 
+			</select>
+		<select id="get" parameterType="_int" resultType="Leixing">
+			select * from  Leixing  where id= #{id}
+		</select>
+			<select id="total" resultType="int">
+	        select count(*) from leixing    
+	    </select>
+<update id="updatesql"  parameterType="String">
+${value}
+</update>
+<delete id="deletesql"  parameterType="String">
+${value}  
+</delete>
+	</mapper>

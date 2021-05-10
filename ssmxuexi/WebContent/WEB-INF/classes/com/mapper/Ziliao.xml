@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+	<mapper namespace="com.mapper.ZiliaoMapper">
+		<resultMap type="Ziliao" id="ziliaoResult">
+			<id property="id" column="id"/>
+			<result property="name" column="name"/>
+			<result property="leixing" column="leixing"/>
+			<result property="kinfo" column="kinfo"/>
+			<result property="zfile" column="zfile"/>
+			<result property="jieshao" column="jieshao"/>
+			<result property="addtime" column="addtime"/>
+			<result property="uname" column="uname"/>
+			<association property="kinfo" column="kinfofk" select="com.mapper.KinfoMapper.get">
+			</association>
+		</resultMap>
+		<insert id="insert" parameterType="Ziliao">
+			insert into ziliao
+			<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="name != null">name,</if>
+			<if test="leixing != null">leixing,</if>
+			<if test="kinfo != null">kinfo,</if>
+			<if test="zfile != null">zfile,</if>
+			<if test="jieshao != null">jieshao,</if>
+			<if test="addtime != null">addtime,</if>
+			<if test="uname != null">uname,</if>
+			</trim>
+			<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="name != null">#{name},</if>
+			<if test="leixing != null">#{leixing},</if>
+			<if test="kinfo != null">#{kinfo},</if>
+			<if test="zfile != null">#{zfile},</if>
+			<if test="jieshao != null">#{jieshao},</if>
+			<if test="addtime != null">#{addtime},</if>
+			<if test="uname != null">#{uname},</if>
+			</trim>
+		</insert>
+		<update id="update" parameterType="Ziliao">
+			update ziliao
+			<trim prefix="set" suffixOverrides=",">
+			<if test="name != null">name=#{name},</if>
+			<if test="leixing != null">leixing=#{leixing},</if>
+			<if test="kinfo != null">kinfo=#{kinfo},</if>
+			<if test="zfile != null">zfile=#{zfile},</if>
+			<if test="jieshao != null">jieshao=#{jieshao},</if>
+			<if test="addtime != null">addtime=#{addtime},</if>
+			<if test="uname != null">uname=#{uname},</if>
+		</trim>
+			where id=#{id}
+		</update>
+		<delete id="delete" parameterType="Ziliao">
+			delete from ziliao where id= #{id}
+		</delete>
+		<select id="list" resultType="Ziliao" resultMap="ziliaoResult">
+			select * from  ziliao where 1=1 ${where} order by id desc
+			</select>
+		<select id="sealist" resultType="Ziliao" resultMap="ziliaoResult">
+			select * from  ziliao where 1=1 ${where} 
+			</select>
+		<select id="get" parameterType="_int" resultType="Ziliao">
+			select * from  Ziliao  where id= #{id}
+		</select>
+			<select id="total" resultType="int">
+	        select count(*) from ziliao    
+	    </select>
+<update id="updatesql"  parameterType="String">
+${value}
+</update>
+<delete id="deletesql"  parameterType="String">
+${value}  
+</delete>
+	</mapper>
